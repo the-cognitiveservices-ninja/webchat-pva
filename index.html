@@ -5,14 +5,32 @@
            .pva-floating-style {
                 position: fixed;
                 right: 0px;
-                height: 80%;
-                bottom: 50px;
+                height: 85%;
+                bottom: 70px;
                 width: 30%;
                 box-shadow: rgb(0 0 0 / 13%) 0px 3.2px 7.2px, rgb(0 0 0 / 11%) 0px 0.6px 1.8px;
                 margin-right: 16px;
                 margin-bottom: 18px;
-                border: 2px solid #053364;
+                border: 1px solid #fcc236;
                 z-index: 9999;
+            }
+            h1 {
+                font-size: 16px;
+                line-height: 20px;
+                color: whitesmoke;
+                display: table-cell;
+                padding: 13px 0px 0px 20px;
+            }
+            .heading {
+                background-color: #fcc236;
+                height: 50px;
+                border-radius: 2px 2px 2px 2px;
+            }
+            body {
+                margin: 10px;
+                background-image: url('128515.jpg');
+                background-repeat: no-repeat;
+                background-size: 1348px 768px;
             }
                
                 
@@ -44,8 +62,9 @@
               cardEmphasisBackgroundColor: '#F0F0F0',
               paddingRegular: 10,
               paddingWide: 10 * 2,
-              subtle: '#767676'
-
+              subtle: '#767676',
+              messageActivityWordBreak: 'break-word', // 'normal' || 'break-all' || 'break-word' || 'keep-all'
+              fontSizeSmall: '80%',
             
               // Avatar Options
               avatarSize: 40,
@@ -55,64 +74,117 @@
               userAvatarBackgroundColor: undefined, // defaults to accent color
               userAvatarImage: '',
               userAvatarInitials: 'You',
-              
+              // Markdown
+              markdownRespectCRLF: true,
+
+              rootHeight: '94%',
+              rootWidth: '100%',
+
+              hideScrollToEndButton: false,
+              showSpokenText: false,
+
+              // Bubble Styling 
               bubbleBackground: '#eeeeee',
-               bubbleBorderColor: '#bcbcbc',
-               bubbleBorderRadius: 4,
-               bubbleBorderWidth: 2,
-               bubbleNubOffset: 0,
-               bubbleNubSize: 10,
-               bubbleFromUserBackground: '#F4F4F4',
-               bubbleFromUserBorderColor: '#bcbcbc',
-               bubbleFromUserBorderRadius: 4,
-               bubbleFromUserBorderWidth: 2,
-               bubbleFromUserNubOffset: 0,
-               bubbleFromUserNubSize: 10,
+              bubbleBorderColor: '#bcbcbc',
+              bubbleBorderRadius: 4,
+              bubbleBorderStyle: 'solid',
+              bubbleBorderWidth: 2,
+              bubbleFromUserBackground: '#F4F4F4',
+              bubbleFromUserBorderColor: '#bcbcbc',
+              bubbleFromUserBorderRadius: 4,
+              bubbleFromUserBorderStyle: 'solid',
+              bubbleFromUserBorderWidth: 2,
+              bubbleFromUserNubOffset: 'bottom',
+              bubbleFromUserNubSize: 10,
+              bubbleFromUserTextColor: 'Black',
+              bubbleImageHeight: 240,
+              bubbleMaxWidth: 480, // screen width = 600px
+              bubbleMinHeight: 40,
+              bubbleMinWidth: 300, // min screen width = 300px
+              bubbleNubOffset: 0,
+              bubbleNubSize: 10,
+              bubbleTextColor: 'Black',
+              groupTimestamp: 3000,
+              showAvatarInGroup: 'status',
 
-               groupTimestamp: 3000,
-               showAvatarInGroup: 'status',
+              // Send Box Styling
+              hideSendBox: false,
+              hideUploadButton: true,
+              microphoneButtonColorOnDictate: '#F33',
+              sendBoxBackground: 'White',
+              sendBoxButtonColor: undefined, // defaults to subtle
+              sendBoxButtonColorOnDisabled: '#CCC',
+              sendBoxButtonColorOnFocus: '#333',
+              sendBoxButtonColorOnHover: '#333',
+              sendBoxDisabledTextColor: undefined, // defaults to subtle
+              sendBoxHeight: 40,
+              sendBoxMaxHeight: 200,
+              sendBoxTextColor: 'Black',
+              sendBoxBorderBottom: 'solid 1px #053364',
+              sendBoxBorderLeft: 'solid 1px #053364',
+              sendBoxBorderRight: 'solid 1px #053364',
+              sendBoxBorderTop: 'solid 1px #053364',
+              sendBoxPlaceholderColor: undefined, // defaults to subtle
+              sendBoxTextWrap: false,
 
-                hideSendBox: false,
-                hideUploadButton: true,
-                microphoneButtonColorOnDictate: '#F33',
-                sendBoxBackground: 'White',
-                sendBoxButtonColor: undefined, // defaults to subtle
-                sendBoxButtonColorOnDisabled: '#CCC',
-                sendBoxButtonColorOnFocus: '#333',
-                sendBoxButtonColorOnHover: '#333',
-                sendBoxDisabledTextColor: undefined, // defaults to subtle
-                sendBoxHeight: 40,
-                sendBoxMaxHeight: 200,
-                sendBoxTextColor: 'Black',
-                sendBoxBorderBottom: 'solid 3px #053364',
-                sendBoxBorderLeft: 'solid 3px #053364',
-                sendBoxBorderRight: 'solid 3px #053364',
-                sendBoxBorderTop: 'solid 3px #053364',
-                sendBoxPlaceholderColor: undefined, // defaults to subtle
-                sendBoxTextWrap: false,
+              // Suggested actions
+              suggestedActionBackground: 'White',
+              suggestedActionBorder: undefined, // split into 3, null
+              suggestedActionBorderColor: undefined, // defaults to accent
+              suggestedActionBorderStyle: 'solid',
+              suggestedActionBoarderWidth: 2,
+              suggestedActionBorderRadius: 4,
+              suggestedActionImageHeight: 20,
+              suggestedActionTextColor: null,
+              suggestedActionDisabledBackground: undefined, // defaults to suggestedActionBackground
+              suggestedActionDisabledBorder: null,
+              suggestedActionDisabledBorderColor: '#E6E6E6',
+              suggestedActionDisabledBorderStyle: 'solid',
+              suggestedActionDisabledBorderWidth: 2,
+              suggestedActionDisabledTextColor: undefined, // defaults to subtle
+              suggestedActionHeight: 40,
 
+              // Visually show spoken text
+              showSpokenText: false,
 
-                suggestedActionBackground: 'White',
-                suggestedActionBorder: undefined, // split into 3, null
-                suggestedActionBorderColor: undefined, // defaults to accent
-                suggestedActionBorderStyle: 'solid',
-                suggestedActionBoarderWidth: 2,
-                suggestedActionBorderRadius: 0,
-                suggestedActionImageHeight: 20,
-                suggestedActionTextColor: null,
-                suggestedActionDisabledBackground: undefined, // defaults to suggestedActionBackground
-                suggestedActionDisabledBorder: null,
-                suggestedActionDisabledBorderColor: '#E6E6E6',
-                suggestedActionDisabledBorderStyle: 'solid',
-                suggestedActionDisabledBorderWidth: 2,
-                suggestedActionDisabledTextColor: undefined, // defaults to subtle
-                suggestedActionHeight: 40,
+              // Timestamp Styling
+              timestampColor: undefined, // defaults to subtle
+              timestampFormat: 'relative', // 'absolute'
 
+              //Transcript overlay buttons
+              transcriptOverlayButtonBackground: 'rgba(0, 0, 0, .6)',
+              transcriptOverlayButtonBackgroundOnFocus: 'rgba(0, 0, 0, .8)',
+              transcriptOverlayButtonBackgroundOnHover: 'rgba(0, 0, 0, .8)',
+              transcriptOverlayButtonColor: 'White',
+              transcriptOverlayButtonColorOnFocus: undefined, // defaults to transcriptOverlayButtonColor
+              transcriptOverlayButtonColorOnHover: undefined, // defaults to transcriptOverlayButtonColor   
+
+              // Connectivity UI
+              connectivityIconPadding: '',
+              connectivityMarginLeftRight: '',
+              connectivityMarginTopBottom: '',
+              connectivityTextSize: '75%',
+              failedConnectivity: '#C50F1F',
+              slowConnectivity: '#EAA300',
+              notificationText: '#5E5E5E',
+              typingAnimationBackgroundImage: null,
+              typingAnimationDuration: 5000,
+              typingAnimationHeight: 20,
+              typingAnimationWidth: 64,
+              spinnerAnimationBackgroundImage: null,
+              spinnerAnimationHeight: 16,
+              spinnerAnimationWidth: 16,
+              spinnerAnimationPaddingRight: 12,
+              enableUploadThumbnail: true,
+              uploadThumbnailContentType: 'image/jpeg',
+              uploadThumbnailHeight: 360,
+              uploadThumbnailQuality: 0.6,
+              uploadThumbnailWidth: 720,
 
             };
 
             // Add your BOT ID below
-            var BOT_ID ="#{nttdemoentoken}#"; 
+            var BOT_ID = "#{botidtoken}#"; 
             var theURL = "https://powerva.microsoft.com/api/botmanagement/v1/directline/directlinetoken?botId=" + BOT_ID;
 
             const store = window.WebChat.createStore(
