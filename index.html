@@ -1,0 +1,159 @@
+
+<!-- Change the text to change the page title --> 
+<title>Webchat for PowerVirtualAgent</title> 
+  <style>
+           .pva-floating-style {
+                position: fixed;
+                right: 0px;
+                height: 80%;
+                bottom: 50px;
+                width: 30%;
+                box-shadow: rgb(0 0 0 / 13%) 0px 3.2px 7.2px, rgb(0 0 0 / 11%) 0px 0.6px 1.8px;
+                margin-right: 16px;
+                margin-bottom: 18px;
+                border: 2px solid #053364;
+                z-index: 9999;
+            }
+               
+                
+  </style>
+
+<div class="pva-floating-style">
+            <div class="heading">
+
+                <!-- Change the h1 text to change the bot name -->    
+                <h1>Power Virtual Agent </h1>
+
+            </div>
+            <div id="webchat" role="main"></div>
+        </div>
+        <script crossorigin="anonymous" src="https://unpkg.com/core-js@2/client/core.min.js"></script>
+        <script crossorigin="anonymous" src="https://unpkg.com/regenerator-runtime@0.13.3/runtime.js"></script>
+        <script crossorigin="anonymous" src="https://unpkg.com/@babel/standalone@7.8.7/babel.min.js"></script>
+        <script crossorigin="anonymous" src="https://unpkg.com/react@16.8.6/umd/react.development.js"></script>
+        <script crossorigin="anonymous" src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js"></script>
+        <script crossorigin="anonymous" src="https://unpkg.com/classnames@2.2.6"></script>
+        <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+        <script>
+            const styleOptions = {
+              // Add styleOptions to customize web chat canvas
+              
+              // Defaults
+              accent: '#0063B1',
+              backgroundColor: 'White',
+              cardEmphasisBackgroundColor: '#F0F0F0',
+              paddingRegular: 10,
+              paddingWide: 10 * 2,
+              subtle: '#767676'
+
+            
+              // Avatar Options
+              avatarSize: 40,
+              botAvatarBackgroundColor: undefined, // defaults to accent color
+              botAvatarImage: 'nina.jpg',
+              botAvatarInitials: 'Bot',
+              userAvatarBackgroundColor: undefined, // defaults to accent color
+              userAvatarImage: '',
+              userAvatarInitials: 'You',
+              
+              bubbleBackground: '#eeeeee',
+               bubbleBorderColor: '#bcbcbc',
+               bubbleBorderRadius: 4,
+               bubbleBorderWidth: 2,
+               bubbleNubOffset: 0,
+               bubbleNubSize: 10,
+               bubbleFromUserBackground: '#F4F4F4',
+               bubbleFromUserBorderColor: '#bcbcbc',
+               bubbleFromUserBorderRadius: 4,
+               bubbleFromUserBorderWidth: 2,
+               bubbleFromUserNubOffset: 0,
+               bubbleFromUserNubSize: 10,
+
+               groupTimestamp: 3000,
+               showAvatarInGroup: 'status',
+
+                hideSendBox: false,
+                hideUploadButton: true,
+                microphoneButtonColorOnDictate: '#F33',
+                sendBoxBackground: 'White',
+                sendBoxButtonColor: undefined, // defaults to subtle
+                sendBoxButtonColorOnDisabled: '#CCC',
+                sendBoxButtonColorOnFocus: '#333',
+                sendBoxButtonColorOnHover: '#333',
+                sendBoxDisabledTextColor: undefined, // defaults to subtle
+                sendBoxHeight: 40,
+                sendBoxMaxHeight: 200,
+                sendBoxTextColor: 'Black',
+                sendBoxBorderBottom: 'solid 3px #053364',
+                sendBoxBorderLeft: 'solid 3px #053364',
+                sendBoxBorderRight: 'solid 3px #053364',
+                sendBoxBorderTop: 'solid 3px #053364',
+                sendBoxPlaceholderColor: undefined, // defaults to subtle
+                sendBoxTextWrap: false,
+
+
+                suggestedActionBackground: 'White',
+                suggestedActionBorder: undefined, // split into 3, null
+                suggestedActionBorderColor: undefined, // defaults to accent
+                suggestedActionBorderStyle: 'solid',
+                suggestedActionBoarderWidth: 2,
+                suggestedActionBorderRadius: 0,
+                suggestedActionImageHeight: 20,
+                suggestedActionTextColor: null,
+                suggestedActionDisabledBackground: undefined, // defaults to suggestedActionBackground
+                suggestedActionDisabledBorder: null,
+                suggestedActionDisabledBorderColor: '#E6E6E6',
+                suggestedActionDisabledBorderStyle: 'solid',
+                suggestedActionDisabledBorderWidth: 2,
+                suggestedActionDisabledTextColor: undefined, // defaults to subtle
+                suggestedActionHeight: 40,
+
+
+            };
+
+            // Add your BOT ID below
+            var BOT_ID ="#{nttdemoentoken}#"; 
+            var theURL = "https://powerva.microsoft.com/api/botmanagement/v1/directline/directlinetoken?botId=" + BOT_ID;
+
+            const store = window.WebChat.createStore(
+               {},
+               ({ dispatch }) => next => action => {
+                   if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
+                      dispatch({
+                          meta: {
+                               method: "keyboard",
+                           },
+                           payload: {
+                               activity: {
+                                     channelData: {
+                                          postBack: true,
+                                     },
+                                      //Web Chat will show the 'Greeting' System Topic message which has a trigger-phrase 'hello'
+                                      name: 'startConversation',
+                                      type: "event"
+                                 },
+                            },
+                            type: "DIRECT_LINE/POST_ACTIVITY",
+                       });
+                 }
+                 return next(action);
+              }
+           );
+           fetch(theURL)
+                .then(response => response.json())
+                .then(conversationInfo => {
+                    window.WebChat.renderWebChat(
+                        {
+                             directLine: window.WebChat.createDirectLine({
+                                token: conversationInfo.token,
+                            }),
+                            store: store,
+                            styleOptions: styleOptions
+                            
+                            
+                        },
+                        document.getElementById('webchat')
+                    );
+                })
+                .catch(err => console.error("An error occurred: " + err));
+        </script>
