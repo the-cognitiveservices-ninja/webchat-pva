@@ -1,231 +1,212 @@
-
-<!-- Change the text to change the page title --> 
-<title>Webchat for PowerVirtualAgent</title> 
-  <style>
-           .pva-floating-style {
-                position: fixed;
-                right: 0px;
-                height: 85%;
-                bottom: 70px;
-                width: 30%;
-                box-shadow: rgb(0 0 0 / 13%) 0px 3.2px 7.2px, rgb(0 0 0 / 11%) 0px 0.6px 1.8px;
-                margin-right: 16px;
-                margin-bottom: 18px;
-                border: 1px solid #fcc236;
-                z-index: 9999;
-            }
-            h1 {
-                font-size: 16px;
-                line-height: 20px;
-                color: whitesmoke;
-                display: table-cell;
-                padding: 13px 0px 0px 20px;
-            }
-            .heading {
-                background-color: #fcc236;
-                height: 50px;
-                border-radius: 2px 2px 2px 2px;
-            }
-            body {
-                margin: 10px;
-                background-image: url('128515.jpg');
-                background-repeat: no-repeat;
-                background-size: 1348px 768px;
-            }
-               
-                
-  </style>
+<!-- Change the text to change the page title -->
+<title>Webchat for PowerVirtualAgent</title>
+<style>
+	.pva-floating-style {
+		position: fixed;
+		right: 0px;
+		height: 85%;
+		bottom: 50px;
+		width: 30%;
+		margin-right: 16px;
+		margin-bottom: 18px;
+		border: 2px solid #fcc236;
+		border-radius: 15px 15px 0px 0px;
+		z-index: 9999;
+	}
+	
+	.heading {
+		background-color: #fcc236;
+		color: #f5f5f5;
+		border-radius: 8px 8px 0px 0px;
+		padding: 10px 20px 10px 10px;
+        z-index: 2;
+	}
+	
+	body {
+		background-image: url('128515.jpg');
+		background-repeat: no-repeat;
+		background-size: 1348px 768px;
+	}
+</style>
 
 <div class="pva-floating-style">
-            <div class="heading">
+	<div class="heading">
+		Power Virtual Agent
+	</div>
+	<div id="webchat" role="main"></div>
+</div>
+<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+<script>
+	const styleOptions = {
+		// Add styleOptions to customize web chat canvas
 
-                <!-- Change the h1 text to change the bot name -->    
-                <h1>Power Virtual Agent </h1>
+		// Defaults
+		rootHeight: '94%',
+		rootWidth: '100%',
+        transitionDuration: '0s',
+		accent: '#0063B1',
+		backgroundColor: '#f5f5f5',
+		cardEmphasisBackgroundColor: '#F0F0F0',
+		// paddingRegular: 10,
+		// paddingWide: 10 * 2,
+		subtle: '#767676',
+		messageActivityWordBreak: 'break-word', // 'normal' || 'break-all' || 'break-word' || 'keep-all'
+		fontSizeSmall: '80%',
 
-            </div>
-            <div id="webchat" role="main"></div>
-        </div>
-        <script crossorigin="anonymous" src="https://unpkg.com/core-js@2/client/core.min.js"></script>
-        <script crossorigin="anonymous" src="https://unpkg.com/regenerator-runtime@0.13.3/runtime.js"></script>
-        <script crossorigin="anonymous" src="https://unpkg.com/@babel/standalone@7.8.7/babel.min.js"></script>
-        <script crossorigin="anonymous" src="https://unpkg.com/react@16.8.6/umd/react.development.js"></script>
-        <script crossorigin="anonymous" src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js"></script>
-        <script crossorigin="anonymous" src="https://unpkg.com/classnames@2.2.6"></script>
-        <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
-        <script>
-            const styleOptions = {
-              // Add styleOptions to customize web chat canvas
-              
-              // Defaults
-              accent: '#0063B1',
-              backgroundColor: 'White',
-              cardEmphasisBackgroundColor: '#F0F0F0',
-              paddingRegular: 10,
-              paddingWide: 10 * 2,
-              subtle: '#767676',
-              messageActivityWordBreak: 'break-word', // 'normal' || 'break-all' || 'break-word' || 'keep-all'
-              fontSizeSmall: '80%',
-            
-              // Avatar Options
-              avatarSize: 40,
-              botAvatarBackgroundColor: "White", // defaults to accent color
-              botAvatarImage: 'logo.png',
-              botAvatarInitials: 'Me',
-              userAvatarBackgroundColor: undefined, // defaults to accent color
-              userAvatarImage: '',
-              userAvatarInitials: 'You',
-              // Markdown
-              markdownRespectCRLF: true,
+		// Avatar Options
+		avatarSize: 40,
+        avatarBorderRadius: '50%',
+		botAvatarBackgroundColor: "#ffffff", // defaults to accent color
+		botAvatarImage: 'logo.png',
+		botAvatarInitials: 'Me',
+		userAvatarBackgroundColor: undefined, // defaults to accent color
+		userAvatarImage: '',
+		userAvatarInitials: 'You',
+		// Markdown
+		markdownRespectCRLF: true,
 
-              rootHeight: '94%',
-              rootWidth: '100%',
+		hideScrollToEndButton: false,
+		showSpokenText: false,
 
-              hideScrollToEndButton: false,
-              showSpokenText: false,
+		// Bubble Styling 
+		bubbleBackground: '#eeeeee',
+		bubbleBorderColor: '#bcbcbc',
+		bubbleBorderRadius: 4,
+		bubbleBorderStyle: 'solid',
+		bubbleBorderWidth: 2,
+		bubbleFromUserBackground: '#F4F4F4',
+		bubbleFromUserBorderColor: '#bcbcbc',
+		bubbleFromUserBorderRadius: 4,
+		bubbleFromUserBorderStyle: 'solid',
+		bubbleFromUserBorderWidth: 2,
+		bubbleFromUserNubOffset: 'bottom',
+		bubbleFromUserNubSize: 10,
+		bubbleFromUserTextColor: 'Black',
+		bubbleImageHeight: 240,
+		bubbleMaxWidth: 480,
+		bubbleMinHeight: 40,
+		bubbleMinWidth: 300,
+		bubbleNubOffset: 0,
+		bubbleNubSize: 10,
+		bubbleTextColor: 'Black',
+		groupTimestamp: 3000,
+		showAvatarInGroup: 'status',
 
-              // Bubble Styling 
-              bubbleBackground: '#eeeeee',
-              bubbleBorderColor: '#bcbcbc',
-              bubbleBorderRadius: 4,
-              bubbleBorderStyle: 'solid',
-              bubbleBorderWidth: 2,
-              bubbleFromUserBackground: '#F4F4F4',
-              bubbleFromUserBorderColor: '#bcbcbc',
-              bubbleFromUserBorderRadius: 4,
-              bubbleFromUserBorderStyle: 'solid',
-              bubbleFromUserBorderWidth: 2,
-              bubbleFromUserNubOffset: 'bottom',
-              bubbleFromUserNubSize: 10,
-              bubbleFromUserTextColor: 'Black',
-              bubbleImageHeight: 240,
-              bubbleMaxWidth: 480, // screen width = 600px
-              bubbleMinHeight: 40,
-              bubbleMinWidth: 300, // min screen width = 300px
-              bubbleNubOffset: 0,
-              bubbleNubSize: 10,
-              bubbleTextColor: 'Black',
-              groupTimestamp: 3000,
-              showAvatarInGroup: 'status',
+		// Send Box Styling
+		hideSendBox: false,
+		hideUploadButton: true,
+		microphoneButtonColorOnDictate: '#F33',
+		sendBoxBackground: '#ffffff',
+		sendBoxButtonColor: undefined, // defaults to subtle
+		sendBoxButtonColorOnDisabled: '#CCC',
+		sendBoxButtonColorOnFocus: '#333',
+		sendBoxButtonColorOnHover: '#333',
+		sendBoxDisabledTextColor: undefined, // defaults to subtle
+		sendBoxHeight: 40,
+		sendBoxMaxHeight: 200,
+		sendBoxTextColor: 'Black',
+		sendBoxBorderBottom: undefined,
+		sendBoxBorderLeft: undefined,
+		sendBoxBorderRight: undefined,
+		sendBoxBorderTop: 'solid 1px #053364',
+		sendBoxPlaceholderColor: undefined, // defaults to subtle
+		sendBoxTextWrap: false,
 
-              // Send Box Styling
-              hideSendBox: false,
-              hideUploadButton: true,
-              microphoneButtonColorOnDictate: '#F33',
-              sendBoxBackground: 'White',
-              sendBoxButtonColor: undefined, // defaults to subtle
-              sendBoxButtonColorOnDisabled: '#CCC',
-              sendBoxButtonColorOnFocus: '#333',
-              sendBoxButtonColorOnHover: '#333',
-              sendBoxDisabledTextColor: undefined, // defaults to subtle
-              sendBoxHeight: 40,
-              sendBoxMaxHeight: 200,
-              sendBoxTextColor: 'Black',
-              sendBoxBorderBottom: 'solid 1px #053364',
-              sendBoxBorderLeft: 'solid 1px #053364',
-              sendBoxBorderRight: 'solid 1px #053364',
-              sendBoxBorderTop: 'solid 1px #053364',
-              sendBoxPlaceholderColor: undefined, // defaults to subtle
-              sendBoxTextWrap: false,
+		// Suggested actions
+		suggestedActionBackground: 'White',
+		suggestedActionBorder: undefined, // split into 3, null
+		suggestedActionBorderColor: undefined, // defaults to accent
+		suggestedActionBorderStyle: 'solid',
+		suggestedActionBoarderWidth: 2,
+		suggestedActionBorderRadius: 4,
+		suggestedActionImageHeight: 20,
+		suggestedActionTextColor: null,
+		suggestedActionDisabledBackground: undefined, // defaults to suggestedActionBackground
+		suggestedActionDisabledBorder: null,
+		suggestedActionDisabledBorderColor: '#E6E6E6',
+		suggestedActionDisabledBorderStyle: 'solid',
+		suggestedActionDisabledBorderWidth: 2,
+		suggestedActionDisabledTextColor: undefined, // defaults to subtle
+		suggestedActionHeight: 40,
 
-              // Suggested actions
-              suggestedActionBackground: 'White',
-              suggestedActionBorder: undefined, // split into 3, null
-              suggestedActionBorderColor: undefined, // defaults to accent
-              suggestedActionBorderStyle: 'solid',
-              suggestedActionBoarderWidth: 2,
-              suggestedActionBorderRadius: 4,
-              suggestedActionImageHeight: 20,
-              suggestedActionTextColor: null,
-              suggestedActionDisabledBackground: undefined, // defaults to suggestedActionBackground
-              suggestedActionDisabledBorder: null,
-              suggestedActionDisabledBorderColor: '#E6E6E6',
-              suggestedActionDisabledBorderStyle: 'solid',
-              suggestedActionDisabledBorderWidth: 2,
-              suggestedActionDisabledTextColor: undefined, // defaults to subtle
-              suggestedActionHeight: 40,
+		// Visually show spoken text
+		showSpokenText: false,
 
-              // Visually show spoken text
-              showSpokenText: false,
+		// Timestamp Styling
+		timestampColor: undefined, // defaults to subtle
+		timestampFormat: 'relative', // 'absolute'
 
-              // Timestamp Styling
-              timestampColor: undefined, // defaults to subtle
-              timestampFormat: 'relative', // 'absolute'
+		//Transcript overlay buttons
+		transcriptOverlayButtonBackground: 'rgba(0, 0, 0, .6)',
+		transcriptOverlayButtonBackgroundOnFocus: 'rgba(0, 0, 0, .8)',
+		transcriptOverlayButtonBackgroundOnHover: 'rgba(0, 0, 0, .8)',
+		transcriptOverlayButtonColor: 'White',
+		transcriptOverlayButtonColorOnFocus: undefined, // defaults to transcriptOverlayButtonColor
+		transcriptOverlayButtonColorOnHover: undefined, // defaults to transcriptOverlayButtonColor   
 
-              //Transcript overlay buttons
-              transcriptOverlayButtonBackground: 'rgba(0, 0, 0, .6)',
-              transcriptOverlayButtonBackgroundOnFocus: 'rgba(0, 0, 0, .8)',
-              transcriptOverlayButtonBackgroundOnHover: 'rgba(0, 0, 0, .8)',
-              transcriptOverlayButtonColor: 'White',
-              transcriptOverlayButtonColorOnFocus: undefined, // defaults to transcriptOverlayButtonColor
-              transcriptOverlayButtonColorOnHover: undefined, // defaults to transcriptOverlayButtonColor   
+		// Connectivity UI
+		connectivityIconPadding: '',
+		connectivityMarginLeftRight: '',
+		connectivityMarginTopBottom: '',
+		connectivityTextSize: '75%',
+		failedConnectivity: '#C50F1F',
+		slowConnectivity: '#EAA300',
+		notificationText: '#5E5E5E',
+		typingAnimationBackgroundImage: null,
+		typingAnimationDuration: 5000,
+		typingAnimationHeight: 20,
+		typingAnimationWidth: 64,
+		spinnerAnimationBackgroundImage: null,
+		spinnerAnimationHeight: 16,
+		spinnerAnimationWidth: 16,
+		spinnerAnimationPaddingRight: 12,
+		enableUploadThumbnail: true,
+		uploadThumbnailContentType: 'image/jpeg',
+		uploadThumbnailHeight: 360,
+		uploadThumbnailQuality: 0.6,
+		uploadThumbnailWidth: 720,
 
-              // Connectivity UI
-              connectivityIconPadding: '',
-              connectivityMarginLeftRight: '',
-              connectivityMarginTopBottom: '',
-              connectivityTextSize: '75%',
-              failedConnectivity: '#C50F1F',
-              slowConnectivity: '#EAA300',
-              notificationText: '#5E5E5E',
-              typingAnimationBackgroundImage: null,
-              typingAnimationDuration: 5000,
-              typingAnimationHeight: 20,
-              typingAnimationWidth: 64,
-              spinnerAnimationBackgroundImage: null,
-              spinnerAnimationHeight: 16,
-              spinnerAnimationWidth: 16,
-              spinnerAnimationPaddingRight: 12,
-              enableUploadThumbnail: true,
-              uploadThumbnailContentType: 'image/jpeg',
-              uploadThumbnailHeight: 360,
-              uploadThumbnailQuality: 0.6,
-              uploadThumbnailWidth: 720,
+	};
 
-            };
+	// Add your BOT ID below
+	var BOT_ID = "#{botidtoken}#"";
+	var theURL = "https://powerva.microsoft.com/api/botmanagement/v1/directline/directlinetoken?botId=" + BOT_ID;
 
-            // Add your BOT ID below
-            var BOT_ID = #{botidtoken}#"; 
-            var theURL = "https://powerva.microsoft.com/api/botmanagement/v1/directline/directlinetoken?botId=" + BOT_ID;
-
-            const store = window.WebChat.createStore(
-               {},
-               ({ dispatch }) => next => action => {
-                   if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
-                      dispatch({
-                          meta: {
-                               method: "keyboard",
-                           },
-                           payload: {
-                               activity: {
-                                     channelData: {
-                                          postBack: true,
-                                     },
-                                      //Web Chat will show the 'Greeting' System Topic message which has a trigger-phrase 'hello'
-                                      name: 'startConversation',
-                                      type: "event"
-                                 },
-                            },
-                            type: "DIRECT_LINE/POST_ACTIVITY",
-                       });
-                 }
-                 return next(action);
-              }
-           );
-           fetch(theURL)
-                .then(response => response.json())
-                .then(conversationInfo => {
-                    window.WebChat.renderWebChat(
-                        {
-                             directLine: window.WebChat.createDirectLine({
-                                token: conversationInfo.token,
-                            }),
-                            store: store,
-                            styleOptions: styleOptions
-                            
-                            
-                        },
-                        document.getElementById('webchat')
-                    );
-                })
-                .catch(err => console.error("An error occurred: " + err));
-        </script>
+	const store = window.WebChat.createStore({}, ({
+		dispatch
+	}) => next => action => {
+		if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
+			dispatch({
+				meta: {
+					method: "keyboard",
+				},
+				payload: {
+					activity: {
+						channelData: {
+							postBack: true,
+						},
+						//Web Chat will show the 'Greeting' System Topic message which has a trigger-phrase 'hello'
+						name: 'startConversation',
+						type: "event"
+					},
+				},
+				type: "DIRECT_LINE/POST_ACTIVITY",
+			});
+		}
+		return next(action);
+	});
+	fetch(theURL)
+		.then(response => response.json())
+		.then(conversationInfo => {
+			window.WebChat.renderWebChat({
+					directLine: window.WebChat.createDirectLine({
+						token: conversationInfo.token,
+					}),
+					store: store,
+					styleOptions: styleOptions
+				},
+				document.getElementById('webchat')
+			);
+		})
+		.catch(err => console.error("An error occurred: " + err));
+</script>
