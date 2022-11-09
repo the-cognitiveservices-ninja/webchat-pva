@@ -172,6 +172,7 @@
 	var BOT_ID = "#{botidtoken}#";
 	var theURL = "https://powerva.microsoft.com/api/botmanagement/v1/directline/directlinetoken?botId=" + BOT_ID;
 
+<<<<<<< HEAD
 	const store = window.WebChat.createStore({}, ({
 		dispatch
 	}) => next => action => {
@@ -210,3 +211,51 @@
 		})
 		.catch(err => console.error("An error occurred: " + err));
 </script>
+=======
+            // Add your BOT ID below
+            var BOT_ID = "#{botidtoken}#"; 
+            var theURL = "https://powerva.microsoft.com/api/botmanagement/v1/directline/directlinetoken?botId=" + BOT_ID;
+
+            const store = window.WebChat.createStore(
+               {},
+               ({ dispatch }) => next => action => {
+                   if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
+                      dispatch({
+                          meta: {
+                               method: "keyboard",
+                           },
+                           payload: {
+                               activity: {
+                                     channelData: {
+                                          postBack: true,
+                                     },
+                                      //Web Chat will show the 'Greeting' System Topic message which has a trigger-phrase 'hello'
+                                      name: 'startConversation',
+                                      type: "event"
+                                 },
+                            },
+                            type: "DIRECT_LINE/POST_ACTIVITY",
+                       });
+                 }
+                 return next(action);
+              }
+           );
+           fetch(theURL)
+                .then(response => response.json())
+                .then(conversationInfo => {
+                    window.WebChat.renderWebChat(
+                        {
+                             directLine: window.WebChat.createDirectLine({
+                                token: conversationInfo.token,
+                            }),
+                            store: store,
+                            styleOptions: styleOptions
+                            
+                            
+                        },
+                        document.getElementById('webchat')
+                    );
+                })
+                .catch(err => console.error("An error occurred: " + err));
+        </script>
+>>>>>>> e9c9c512cbda8a7121e739829127d1922d36dad8
